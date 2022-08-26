@@ -1,0 +1,19 @@
+.appWrapper{
+    display: grid;
+    width: 1200px;
+    margin: 0 auto;
+    gap: 10px;
+    grid-template-areas: 
+        "header header"
+        "searchString searchString"
+        "categories st";
+    grid-template-rows: 100px 30px 1fr ;
+    grid-template-columns: 2fr 10fr;
+}
+
+.appWrapperContent{
+    grid-area: st;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

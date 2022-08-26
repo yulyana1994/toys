@@ -1,0 +1,4 @@
+.wrapper{
+    grid-area: searchString;
+    background-color: pink;
+}
