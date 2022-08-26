@@ -1,7 +1,7 @@
-import fetchAll  from "./fakeApi/state.js";
+import * as toys from "./fakeApi/toys.api";
 
 const API = {
-    getToys: fetchAll,
+  toys,
 };
 
 export default API;

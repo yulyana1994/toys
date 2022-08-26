@@ -1,4 +1,17 @@
 .wrapper{
     grid-area: header;
-    background-color: blue;
+}
+
+.items{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo{
+    width: 120px;
+    height: 100px;
+    padding-left: 10px;
 }

@@ -4,7 +4,8 @@ import s from "./searchString.module.css";
 const SearchString = () => {
   return (
     <div className={s.wrapper}>
-      <input type="text" placeholder="Поиск..." />
+      <img src="/assets/search.png" alt="search" />
+      <input className={s.input} type="text" placeholder="Поиск..." />
     </div>
   );
 };

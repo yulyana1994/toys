@@ -1,4 +1,15 @@
 .wrapper{
     grid-area: searchString;
-    background-color: pink;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #cdcdd8;
+    padding: 0 15px;
+}
+
+.input{
+    border: 0;
+    padding: 5px;
+    font-size: 15px;
+    outline: none;
 }
