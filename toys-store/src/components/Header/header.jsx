@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./header.module.css";
 import Info from "./Info/info";
-import Korzina from "./Korzina/korzina";
+import Cart from "./Cart/cart";
 
 const Header = () => {
   return (
@@ -9,7 +9,7 @@ const Header = () => {
       <div className={s.items}>
         <img className={s.logo} src="/assets/logo.jpg" alt="logo" />
         <Info />
-        <Korzina />
+        <Cart />
         <div className={s.enter}>Вход/Регистрация</div>
       </div>
     </div>

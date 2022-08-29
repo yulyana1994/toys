@@ -1,7 +1,19 @@
-import * as toys from "./fakeApi/toys.api";
+import { categories } from "./fakeApi/categories";
+import toys from "./fakeApi/toys";
+const fetch = (data) =>
+  new Promise((resolve) => {
+    window.setTimeout(function () {
+      resolve(data);
+    }, 2000);
+  });
 
-const API = {
-  toys,
+const api = {
+  toys: {
+    getAll: () => fetch(toys),
+  },
+  categories: {
+    getAll: () => fetch(categories),
+  },
 };
 
-export default API;
+export default api;

@@ -1,11 +1,5 @@
-export const categories = [
-  { id: 1, title: "Для мальчиков" },
-  { id: 2, title: "Для младенцев" },
-  { id: 3, title: "Для девочек" },
-  { id: 4, title: "Канцелярия" },
-];
-
-export const toys = [
+import { categories } from "./categories";
+const toys = [
   {
     id: 1,
     name: "Робот",
@@ -99,6 +93,4 @@ export const toys = [
   },
 ];
 
-export function fetchAll() {
-  return toys;
-}
+export default toys;
