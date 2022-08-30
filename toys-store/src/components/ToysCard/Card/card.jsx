@@ -1,7 +1,8 @@
 import React from "react";
 import s from "./card.module.css";
+import { Link } from "react-router-dom";
 
-const Card = ({ name, src, artikul, price }) => {
+const Card = ({ name, src, artikul, price, cardId }) => {
   return (
     <div className={s.card}>
       <img width={133} height={112} src={src} alt={name} />
@@ -17,7 +18,9 @@ const Card = ({ name, src, artikul, price }) => {
           </span>
         </p>
       </div>
-      <button className={s.button}>Открыть карточку</button>
+      <Link to={`/${cardId}`} className={s.btn}>
+        Открыть карточку
+      </Link>
     </div>
   );
 };

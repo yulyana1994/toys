@@ -1,18 +1,22 @@
 import React from "react";
-import ItemPage from "./pages/ItemPage/itemPage";
 import MainPage from "./pages/MainPage/mainPage";
-import CartPage from "./pages/CartPage/cartPage";
-import EnterPage from "./pages/EnterPage/enterPage";
-import RegistrationPage from "./pages/RegistrationPage/registrationPage";
+import Cart from "./pages/Cart/cart";
+import Login from "./pages/Login/login";
+import { Redirect, Route, Switch } from "react-router-dom";
+import NavBar from "./components/NavBar/navBar";
+import IdToysCard from "./components/ToysCard/idToysCard";
 
 function App() {
   return (
     <div>
-      <MainPage />
-      <ItemPage />
-      <CartPage />
-      <EnterPage />
-      <RegistrationPage />
+      <NavBar />
+      <Switch>
+        <Route path="/" exact component={MainPage} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/login" component={Login} />
+        <Route path="/:cardId?" component={IdToysCard} />
+        <Redirect to="/" />
+      </Switch>
     </div>
   );
 }

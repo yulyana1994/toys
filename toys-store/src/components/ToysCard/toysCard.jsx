@@ -18,6 +18,7 @@ const ToysCard = () => {
       src={el.img}
       artikul={el.id}
       price={el.price}
+      cardId={el.id}
     />
   ));
 

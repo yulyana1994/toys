@@ -4,10 +4,10 @@
     margin: 0 auto;
     gap: 10px;
     grid-template-areas: 
-        "header header"
+        "navBar navBar"
         "searchString searchString"
         "categories st";
-    grid-template-rows: 100px 30px 1fr ;
+    grid-template-rows: 50px 30px 1fr ;
     grid-template-columns: 2fr 10fr;
 }
 
