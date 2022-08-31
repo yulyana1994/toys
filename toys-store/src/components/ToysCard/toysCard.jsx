@@ -7,6 +7,7 @@ import { useEffect } from "react";
 
 const ToysCard = () => {
   const [toys, setToys] = useState([]);
+
   useEffect(() => {
     api.toys.getAll().then((data) => setToys(data));
   }, []);

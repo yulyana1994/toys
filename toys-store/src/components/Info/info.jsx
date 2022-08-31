@@ -6,7 +6,10 @@ const Info = () => {
     <div>
       <ul className={s.socList}>
         <li>
-          <a href="https://www.instagram.com/yulianna.shulzhenko/">
+          <a
+            href="https://www.instagram.com/yulianna.shulzhenko/"
+            target="_blank"
+          >
             <img
               className={s.logoinst}
               src="/assets/instagram.png"
