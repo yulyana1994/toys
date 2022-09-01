@@ -16,9 +16,6 @@ const Card = ({ name, src, artikul, price, cardId }) => {
           <span>
             {price} <span> рублей</span>
           </span>
-          <span>
-            {price} <span> проверка</span>
-          </span>
         </p>
       </div>
       <Link to={`/${cardId}`} className={s.btn}>
