@@ -11,10 +11,10 @@ function App() {
     <div>
       <NavBar />
       <Switch>
-        <Route path="/" exact component={MainPage} />
+        <Route path="/toys" exact component={MainPage} />
         <Route path="/cart" component={CartPage} />
         <Route path="/login" component={LoginPage} />
-        <Route path="/:cardId?" component={ProductCard} />
+        <Route path="/toys/:cardId?" component={ProductCard} />
         <Redirect to="/" />
       </Switch>
     </div>

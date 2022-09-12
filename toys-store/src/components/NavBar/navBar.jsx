@@ -8,7 +8,7 @@ const NavBar = () => {
     <div className={s.wrapper}>
       <ul className={s.nav}>
         <li className={s.navLink}>
-          <Link to="/">
+          <Link to="/toys">
             <img className={s.logo} src="assets/logo2.png" alt="logo" />
           </Link>
         </li>
@@ -19,7 +19,7 @@ const NavBar = () => {
           Вход/ Регистрация
         </Link>
         <Link className={s.navLink} to="/cart">
-          <img src="/assets/korzina.png" alt="cart" /> Корзина
+          <img src="assets/korzina.png" alt="cart" /> Корзина
         </Link>
       </ul>
     </div>
