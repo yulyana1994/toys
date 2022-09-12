@@ -16,7 +16,7 @@ const ToysCard = () => {
     <Card
       key={el.id}
       name={el.name}
-      src={el.img}
+      img={el.img}
       artikul={el.id}
       price={el.price}
       cardId={el.id}
