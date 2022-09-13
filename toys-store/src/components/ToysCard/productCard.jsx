@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import api from "./../../api";
 import { useEffect } from "react";
@@ -11,6 +11,7 @@ const ProductCard = () => {
 
   const [card, setCard] = useState();
   const [count, setCount] = useState(1);
+  const [cartItems, setCartItems] = useState(123);
 
   useEffect(() => {
     api.toys.getById(cardId).then((data) => setCard(data));
@@ -22,6 +23,10 @@ const ProductCard = () => {
 
   const minus = () => {
     setCount(count - 1);
+  };
+
+  const pushItem = () => {
+    setCartItems((prev) => [...prev, card]);
   };
 
   if (card) {
@@ -48,10 +53,12 @@ const ProductCard = () => {
                 </div>
               </div>
             </div>
-            <div className={s.title}> Cтоимость: {card.price * count}</div>
+            <div className={s.title}> Cтоимость: {count * card.price}</div>
           </div>
           <div>
-            <button> Купить</button>
+            <Link to="/cart" className={s.btn2} onClick={pushItem}>
+              Купить
+            </Link>
             <div> Артикул товара: {card.id}</div>
           </div>
         </div>
