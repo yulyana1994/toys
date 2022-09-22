@@ -11,11 +11,7 @@ const Info = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <img
-              className={s.logoinst}
-              src="/assets/instagram.png"
-              alt="inst"
-            />
+            <img className={s.logoinst} src="assets/instagram.png" alt="inst" />
           </a>
         </li>
         <li>
