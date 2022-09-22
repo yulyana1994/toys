@@ -3,37 +3,39 @@ import { useState } from "react";
 
 import s from "./cartPage.module.css";
 
+let product = [
+  {
+    id: 10,
+    name: "Кубик развивающий для детей",
+    price: 6,
+    count: 2,
+    img: "assets/kubik.jpg",
+  },
+  {
+    id: 11,
+    name: "Набор цветных ручек",
+    price: 5,
+    count: 3,
+    img: "assets/k1.jpg",
+  },
+  {
+    id: 12,
+    name: "Набор цветных маркеров",
+    price: 7,
+    count: 4,
+    img: "assets/k36.jpg",
+  },
+  {
+    id: 13,
+    name: "Игра молоток",
+    price: 10,
+    count: 1,
+    img: "assets/molotok.jpeg",
+  },
+];
+
 const CartPage = () => {
-  const [products, setProducts] = useState([
-    {
-      id: 10,
-      name: "Кубик развивающий для детей",
-      price: 6,
-      count: 2,
-      img: "assets/kubik.jpg",
-    },
-    {
-      id: 11,
-      name: "Набор цветных ручек",
-      price: 5,
-      count: 3,
-      img: "assets/k1.jpg",
-    },
-    {
-      id: 12,
-      name: "Набор цветных маркеров",
-      price: 7,
-      count: 4,
-      img: "assets/k36.jpg",
-    },
-    {
-      id: 13,
-      name: "Игра молоток",
-      price: 10,
-      count: 1,
-      img: "assets/molotok.jpeg",
-    },
-  ]);
+  const [products, setProducts] = useState(product);
 
   const handleDelete = (productsId) => {
     setProducts(products.filter((el) => el.id !== productsId));
@@ -45,7 +47,7 @@ const CartPage = () => {
     <div className={s.cart}>
       <div>
         {products.map((pr) => (
-          <div className={s.cartItem}>
+          <div className={s.cartItem} key={pr.id}>
             <img
               className={s.imgToys}
               src="assets/podvesnay1.jpeg"
