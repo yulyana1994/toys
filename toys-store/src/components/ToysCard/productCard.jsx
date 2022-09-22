@@ -27,6 +27,7 @@ const ProductCard = () => {
 
   const pushItem = () => {
     setCartItems((prev) => [...prev, card]);
+    console.log(cartItems);
   };
 
   if (card) {
