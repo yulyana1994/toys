@@ -6,6 +6,7 @@ import api from "./../../api";
 import { useEffect } from "react";
 import Categories from "../../components/Categories/categories";
 import Pagination from "../Pagination/pagination";
+import { paginate } from "../../utils/paginate";
 
 const ToysCard = () => {
   const [toys, setToys] = useState([]);
@@ -33,10 +34,7 @@ const ToysCard = () => {
   };
 
   const filteredToys = selectedCategories
-    ? toys.filter(
-        (toy) =>
-          JSON.stringify(toy.category) === JSON.stringify(selectedCategories)
-      )
+    ? toys.filter((toy) => toy.category === selectedCategories)
     : toys;
 
   const count = filteredToys.length;
@@ -75,7 +73,7 @@ const ToysCard = () => {
           items={categories}
           onItemSelect={handleCategoriesSelect}
         />
-        <button className={s.btn} onClick={clearFilter}>
+        <button className={s.btnClear} onClick={clearFilter}>
           Очистить
         </button>
       </div>

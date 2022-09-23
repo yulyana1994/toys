@@ -30,13 +30,14 @@
 }
 .btn:focus {
 	box-shadow: 0 0 0 3px rgb(121 82 179 / 25%);
+	background-color: #fff;
+	color: #7952b3 ;
 }
 .btn:hover {
-	background-color: #61428f;
-	border-color: #61428f;
+	border-color: #fff;
 }
 .btn:active {
-	background-color: #61428f !important;
+	background-color: #7952b3 !important;
 	border-color: #61428f !important;
 }
 .btn:disabled {
