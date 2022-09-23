@@ -6,7 +6,7 @@
     grid-template-areas: 
         "navBar navBar"
         "searchString searchString"
-        "categories st";
+        "st st";
     grid-template-rows: 50px 30px 1fr ;
     grid-template-columns: 2fr 10fr;
 }
