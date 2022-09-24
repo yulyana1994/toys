@@ -2,7 +2,6 @@ import React from "react";
 import s from "./categories.module.css";
 
 const Сategories = ({ items, onItemSelect }) => {
-  console.log(items);
   return (
     <ul className={s.wrapper}>
       {items.map((item) => (

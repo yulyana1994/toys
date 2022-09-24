@@ -7,12 +7,15 @@ import { useEffect } from "react";
 import Categories from "../../components/Categories/categories";
 import Pagination from "../Pagination/pagination";
 import { paginate } from "../../utils/paginate";
+import Sort from "../Sort/sort";
+import _ from "lodash";
 
 const ToysCard = () => {
   const [toys, setToys] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState();
+  const [sortBy, setSortBy] = useState({ iter: "price", order: "asc" });
 
   useEffect(() => {
     api.toys.getAll().then((data) => setToys(data));
@@ -28,18 +31,14 @@ const ToysCard = () => {
 
   const pageSize = 6;
 
-  const paginate = (items, pageNumber, pageSize) => {
-    const startIndex = (pageNumber - 1) * pageSize;
-    return [...items].splice(startIndex, pageSize);
-  };
-
   const filteredToys = selectedCategories
     ? toys.filter((toy) => toy.category === selectedCategories)
     : toys;
 
   const count = filteredToys.length;
+  const sortedToys = _.orderBy(filteredToys, [sortBy.iter], [sortBy.order]);
 
-  const toysCrop = paginate(filteredToys, currentPage, pageSize);
+  const toysCrop = paginate(sortedToys, currentPage, pageSize);
 
   let toysCard = toysCrop.map((el) => (
     <Card
@@ -58,11 +57,21 @@ const ToysCard = () => {
 
   const handleCategoriesSelect = (item) => {
     setSelectedCategories(item);
-    console.log(item);
   };
 
   const clearFilter = () => {
     setSelectedCategories();
+  };
+
+  const handleSort = (item) => {
+    if (sortBy.iter === item) {
+      setSortBy((prevState) => ({
+        ...prevState,
+        order: prevState.order === "asc" ? "desc" : "asc",
+      }));
+    } else {
+      setSortBy({ iter: item, order: "asc" });
+    }
   };
 
   return (
@@ -78,6 +87,9 @@ const ToysCard = () => {
         </button>
       </div>
       <div className={s.wrapper}>
+        <div>
+          <Sort onSort={handleSort} />
+        </div>
         <div className={s.toysCard}>{toysCard}</div>
         <Pagination
           itemsCount={count}
