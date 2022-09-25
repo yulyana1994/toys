@@ -1,12 +1,29 @@
 .commonWrapper{
-    display: flex;
-   
-    gap: 40px;
+    display: grid;
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 30px;
+    gap: 15px;
+    grid-template-areas: 
+        "searchString searchString"
+        "category st";
+    grid-template-rows: 50px 1fr ;
+    grid-template-columns: 2fr 10fr;
+}
+
+.searchWrapper{
+    grid-area: searchString;
+}
+
+.categoriesWrapper{
+    grid-area: category;
 }
 
 .wrapper{
     display: flex;
     flex-direction: column;
+    grid-area: st;
+    gap: 10px;
 }
 
 .toysCard{

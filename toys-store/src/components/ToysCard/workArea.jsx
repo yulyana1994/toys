@@ -1,21 +1,24 @@
 import React from "react";
-import s from "./toysCard.module.css";
+import s from "./workArea.module.css";
 import Card from "./Card/card";
 import { useState } from "react";
-import api from "./../../api";
+import api from "../../api";
 import { useEffect } from "react";
-import Categories from "../../components/Categories/categories";
+import Categories from "../Categories/categories";
 import Pagination from "../Pagination/pagination";
 import { paginate } from "../../utils/paginate";
 import Sort from "../Sort/sort";
+import SearchString from "../Search/searchString";
 import _ from "lodash";
 
-const ToysCard = () => {
+const WorkArea = () => {
   const [toys, setToys] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState();
-  const [sortBy, setSortBy] = useState({ iter: "price", order: "asc" });
+  const [sortBy, setSortBy] = useState({ iter: "", order: "" });
+
+  console.log(sortBy);
 
   useEffect(() => {
     api.toys.getAll().then((data) => setToys(data));
@@ -76,7 +79,10 @@ const ToysCard = () => {
 
   return (
     <div className={s.commonWrapper}>
-      <div>
+      <div className={s.searchWrapper}>
+        <SearchString />
+      </div>
+      <div className={s.categoriesWrapper}>
         <Categories
           selectedItem={selectedCategories}
           items={categories}
@@ -102,4 +108,4 @@ const ToysCard = () => {
   );
 };
 
-export default ToysCard;
+export default WorkArea;

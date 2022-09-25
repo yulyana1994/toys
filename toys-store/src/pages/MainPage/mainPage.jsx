@@ -1,15 +1,11 @@
 import React from "react";
-import SearchString from "./../../components/Search/searchString";
 import s from "./mainPage.module.css";
-import ToysCard from "../../components/ToysCard/toysCard";
+import WorkArea from "../../components/ToysCard/workArea";
 
 const MainPage = () => {
   return (
-    <div className={s.appWrapper}>
-      <SearchString />
-      <div className={s.appWrapperContent}>
-        <ToysCard />
-      </div>
+    <div className={s.appWrapperContent}>
+      <WorkArea />
     </div>
   );
 };

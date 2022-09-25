@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import api from "./../../api";
 import { useEffect } from "react";
-import s from "./toysCard.module.css";
+import s from "./workArea.module.css";
 
 const ProductCard = () => {
   const params = useParams();

@@ -1,5 +1,4 @@
 .sort{
-    display: flex;
     border: 1px solid #f3f3f3;
     padding: 10px;
     width: 900px;
@@ -9,7 +8,14 @@
     
 }
 
-.nav{
-    list-style: none;
-    cursor: pointer;
+.sortImg{
+    width: 15px;
+    height: 18px;
+    margin-left: 3px;
+}
+
+.sortForm{
+    display: flex;
+    gap: 8px;
+    
 }
