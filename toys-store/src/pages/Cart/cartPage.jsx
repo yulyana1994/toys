@@ -29,16 +29,20 @@ const CartPage = () => {
               <div className={s.info}>
                 <p>Артикул: {pr.id}</p>
                 <p>{pr.name}</p>
-                <p>Стоимость: {pr.price} рублей</p>
+                <p>Стоимость: {pr.price * pr.count} рублей</p>
                 <p> Количество: {pr.count} штук</p>
               </div>
-              <button onClick={() => handleDelete(pr.id)}>Удалить</button>
+              <button className={s.btn} onClick={() => handleDelete(pr.id)}>
+                Удалить
+              </button>
             </div>
           ))}
         </div>
         <div className={s.totalPrice}>
           <p>Итого: {totalPrice} рублей</p>
-          <button onClick={() => addOrder()}>Оформить заказ </button>
+          <button className={s.btn} onClick={() => addOrder()}>
+            Оформить заказ
+          </button>
         </div>
       </div>
     );

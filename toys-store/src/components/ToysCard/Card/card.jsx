@@ -31,7 +31,7 @@ const Card = ({ name, img, artikul, price, cardId, onAdd }) => {
       </div>
       <div className={s.blockQuality}>
         <div className={s.title}> Количество: {count}</div>
-        <div>
+        <div className={s.btnMP}>
           <button onClick={plus} className={s.btn}>
             +
           </button>
@@ -47,7 +47,7 @@ const Card = ({ name, img, artikul, price, cardId, onAdd }) => {
       <div>
         <p>Стоимость: {price * count} рублей</p>
       </div>
-      <button onClick={() => onAdd({ ...card, count })}>
+      <button className={s.btn} onClick={() => onAdd({ ...card, count })}>
         Добавить в корзину
       </button>
 
