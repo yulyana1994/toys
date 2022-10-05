@@ -11,7 +11,7 @@ const ProductCard = () => {
 
   const [card, setCard] = useState();
   const [count, setCount] = useState(1);
-  const [cartItems, setCartItems] = useState(123);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     api.toys.getById(cardId).then((data) => setCard(data));
@@ -26,12 +26,14 @@ const ProductCard = () => {
   };
 
   const pushItem = () => {
-    setCartItems((prev) => [...prev, card]);
+    // setCartItems((prev) => [...prev, card]);
+    setCartItems(cartItems.push(card));
     console.log(cartItems);
   };
 
   if (card) {
     return (
+      // <CartItemsContext.Provider value={cartItems}>
       <div className={s.wrapperProductCard}>
         <div className={s.card}>
           <img width={133} height={112} src={card.src} alt={card.name} />
@@ -64,6 +66,7 @@ const ProductCard = () => {
           </div>
         </div>
       </div>
+      // </CartItemsContext.Provider>
     );
   } else {
     return <div> loading...</div>;

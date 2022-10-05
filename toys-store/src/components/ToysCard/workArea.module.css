@@ -5,6 +5,7 @@
     margin-top: 30px;
     gap: 15px;
     grid-template-areas: 
+        "navBar navBar"
         "searchString searchString"
         "category st";
     grid-template-rows: 50px 1fr ;
@@ -31,6 +32,11 @@
     flex-wrap: wrap;
     gap: 30px;
     justify-content: space-around;
+}
+
+.toysCard:hover{
+    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.06) ;
+    transform: translateY(-5px);
 }
 
 .wrapperProductCard{

@@ -10,6 +10,8 @@ import { paginate } from "../../utils/paginate";
 import Sort from "../Sort/sort";
 import SearchString from "../Search/searchString";
 import _ from "lodash";
+import { useContext } from "react";
+import { CartContext } from "../../App";
 
 const WorkArea = () => {
   const [toys, setToys] = useState([]);
@@ -18,7 +20,7 @@ const WorkArea = () => {
   const [selectedCategories, setSelectedCategories] = useState();
   const [sortBy, setSortBy] = useState({ iter: "", order: "" });
 
-  console.log(sortBy);
+  const { orders, add } = useContext(CartContext);
 
   useEffect(() => {
     api.toys.getAll().then((data) => setToys(data));
@@ -43,17 +45,6 @@ const WorkArea = () => {
 
   const toysCrop = paginate(sortedToys, currentPage, pageSize);
 
-  let toysCard = toysCrop.map((el) => (
-    <Card
-      key={el.id}
-      name={el.name}
-      img={el.img}
-      artikul={el.id}
-      price={el.price}
-      cardId={el.id}
-    />
-  ));
-
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex);
   };
@@ -77,32 +68,46 @@ const WorkArea = () => {
     }
   };
 
+  const toysCard = toysCrop.map((el) => (
+    <Card
+      key={el.id}
+      name={el.name}
+      img={el.img}
+      artikul={el.id}
+      price={el.price}
+      cardId={el.id}
+      onAdd={add}
+    />
+  ));
+
   return (
-    <div className={s.commonWrapper}>
-      <div className={s.searchWrapper}>
-        <SearchString />
-      </div>
-      <div className={s.categoriesWrapper}>
-        <Categories
-          selectedItem={selectedCategories}
-          items={categories}
-          onItemSelect={handleCategoriesSelect}
-        />
-        <button className={s.btnClear} onClick={clearFilter}>
-          Очистить
-        </button>
-      </div>
-      <div className={s.wrapper}>
-        <div>
-          <Sort onSort={handleSort} />
+    <div>
+      <div className={s.commonWrapper}>
+        <div className={s.searchWrapper}>
+          <SearchString />
         </div>
-        <div className={s.toysCard}>{toysCard}</div>
-        <Pagination
-          itemsCount={count}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-        />
+        <div className={s.categoriesWrapper}>
+          <Categories
+            selectedItem={selectedCategories}
+            items={categories}
+            onItemSelect={handleCategoriesSelect}
+          />
+          <button className={s.btnClear} onClick={clearFilter}>
+            Очистить
+          </button>
+        </div>
+        <div className={s.wrapper}>
+          <div>
+            <Sort onSort={handleSort} />
+          </div>
+          <div className={s.toysCard}>{toysCard}</div>
+          <Pagination
+            itemsCount={count}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        </div>
       </div>
     </div>
   );
