@@ -1,74 +1,54 @@
 import React from "react";
+import { useContext } from "react";
+import s from "./cartPage.module.css";
+import { CartContext } from "./../../App";
 import { useState } from "react";
 
-import s from "./cartPage.module.css";
-
-let product = [
-  {
-    id: 10,
-    name: "Кубик развивающий для детей",
-    price: 6,
-    count: 2,
-    img: "assets/kubik.jpg",
-  },
-  {
-    id: 11,
-    name: "Набор цветных ручек",
-    price: 5,
-    count: 3,
-    img: "assets/k1.jpg",
-  },
-  {
-    id: 12,
-    name: "Набор цветных маркеров",
-    price: 7,
-    count: 4,
-    img: "assets/k36.jpg",
-  },
-  {
-    id: 13,
-    name: "Игра молоток",
-    price: 10,
-    count: 1,
-    img: "assets/molotok.jpeg",
-  },
-];
-
 const CartPage = () => {
-  const [products, setProducts] = useState(product);
+  const data = useContext(CartContext);
+  const [products, setProducts] = useState(data.orders);
+  console.log(products);
 
   const handleDelete = (productsId) => {
     setProducts(products.filter((el) => el.id !== productsId));
   };
 
-  const totalPrice = products.reduce((sum, pr) => pr.price + sum, 0);
+  const addOrder = () => {
+    alert("Заказ принят!");
+  };
 
-  return (
-    <div className={s.cart}>
-      <div>
-        {products.map((pr) => (
-          <div className={s.cartItem} key={pr.id}>
-            <img
-              className={s.imgToys}
-              src="assets/podvesnay1.jpeg"
-              alt="Подвесная игрушка уточка"
-            />
-            <div className={s.info}>
-              <p>Артикул: {pr.id}</p>
-              <p>{pr.name}</p>
-              <p>Стоимость: {pr.price} рублей</p>
-              <p> Количество: {pr.count} штук</p>
+  const totalPrice = products.reduce((sum, pr) => pr.price * pr.count + sum, 0);
+
+  if (products.length > 0) {
+    return (
+      <div className={s.cart}>
+        <div>
+          {products.map((pr) => (
+            <div className={s.cartItem} key={pr.id}>
+              <img className={s.imgToys} src={pr.img} alt={pr.name} />
+              <div className={s.info}>
+                <p>Артикул: {pr.id}</p>
+                <p>{pr.name}</p>
+                <p>Стоимость: {pr.price * pr.count} рублей</p>
+                <p> Количество: {pr.count} штук</p>
+              </div>
+              <button className={s.btn} onClick={() => handleDelete(pr.id)}>
+                Удалить
+              </button>
             </div>
-            <button onClick={() => handleDelete(pr.id)}>Удалить</button>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className={s.totalPrice}>
+          <p>Итого: {totalPrice} рублей</p>
+          <button className={s.btn} onClick={() => addOrder()}>
+            Оформить заказ
+          </button>
+        </div>
       </div>
-      <div className={s.totalPrice}>
-        <p>Итого: {totalPrice} рублей</p>
-        <button>Оформить заказ </button>
-      </div>
-    </div>
-  );
+    );
+  } else {
+    return <div>Корзина пуста...</div>;
+  }
 };
 
 export default CartPage;

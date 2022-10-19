@@ -1,15 +1,3 @@
-.appWrapper{
-    display: grid;
-    width: 1200px;
-    margin: 0 auto;
-    gap: 10px;
-    grid-template-areas: 
-        "navBar navBar"
-        "searchString searchString"
-        "st st";
-    grid-template-rows: 50px 30px 1fr ;
-    grid-template-columns: 2fr 10fr;
-}
 
 .appWrapperContent{
     grid-area: st;

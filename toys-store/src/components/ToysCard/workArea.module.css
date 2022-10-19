@@ -1,12 +1,40 @@
 .commonWrapper{
-    display: flex;
-   
-    gap: 40px;
+    display: grid;
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 30px;
+    gap: 15px;
+    grid-template-areas: 
+        "navBar navBar"
+        "searchString searchString"
+        "category st";
+    grid-template-rows: 50px 1fr ;
+    grid-template-columns: 2fr 10fr;
+}
+
+.searchWrapper{
+    grid-area: searchString;
+    border-radius: 10px;
+    border: 1px solid #cdcdd8;
+    padding: 0 15px;
+}
+
+.input{
+    border: 0;
+    padding: 5px;
+    font-size: 15px;
+    outline: none;
+}
+
+.categoriesWrapper{
+    grid-area: category;
 }
 
 .wrapper{
     display: flex;
     flex-direction: column;
+    grid-area: st;
+    gap: 10px;
 }
 
 .toysCard{
@@ -14,6 +42,11 @@
     flex-wrap: wrap;
     gap: 30px;
     justify-content: space-around;
+}
+
+.toysCard:hover{
+    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.06) ;
+    transform: translateY(-5px);
 }
 
 .wrapperProductCard{
