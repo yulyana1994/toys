@@ -8,7 +8,6 @@ import Categories from "../Categories/categories";
 import Pagination from "../Pagination/pagination";
 import { paginate } from "../../utils/paginate";
 import Sort from "../Sort/sort";
-import SearchString from "../Search/searchString";
 import _ from "lodash";
 import { useContext } from "react";
 import { CartContext } from "../../App";
@@ -16,6 +15,7 @@ import { CartContext } from "../../App";
 const WorkArea = () => {
   const [toys, setToys] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState();
   const [sortBy, setSortBy] = useState({ iter: "", order: "" });
@@ -28,7 +28,7 @@ const WorkArea = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategories]);
+  }, [selectedCategories, searchQuery]);
 
   useEffect(() => {
     api.categories.getAll().then((data) => setCategories(data));
@@ -36,7 +36,12 @@ const WorkArea = () => {
 
   const pageSize = 6;
 
-  const filteredToys = selectedCategories
+  const filteredToys = searchQuery
+    ? toys.filter(
+        (toy) =>
+          toy.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
+      )
+    : selectedCategories
     ? toys.filter((toy) => toy.category === selectedCategories)
     : toys;
 
@@ -50,7 +55,15 @@ const WorkArea = () => {
   };
 
   const handleCategoriesSelect = (item) => {
+    if (searchQuery !== "") {
+      setSearchQuery("");
+    }
     setSelectedCategories(item);
+  };
+
+  const handleSearchQuery = ({ target }) => {
+    setSelectedCategories(undefined);
+    setSearchQuery(target.value);
   };
 
   const clearFilter = () => {
@@ -84,7 +97,15 @@ const WorkArea = () => {
     <div>
       <div className={s.commonWrapper}>
         <div className={s.searchWrapper}>
-          <SearchString />
+          <img src="assets/search.png" alt="search" />
+          <input
+            className={s.input}
+            type="text"
+            placeholder="Поиск..."
+            name="searchQuery"
+            onChange={handleSearchQuery}
+            value={searchQuery}
+          />
         </div>
         <div className={s.categoriesWrapper}>
           <Categories
