@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MainPage from "./pages/MainPage/mainPage";
 import CartPage from "./pages/Cart/cartPage";
-import LoginPage from "./pages/Login/loginPage";
+import Login from "./pages/Login/login";
 import { Redirect, Route, Switch } from "react-router-dom";
 import ProductCard from "./components/ToysCard/productCard";
 import NavBar from "./components/NavBar/navBar";
@@ -36,7 +36,7 @@ function App() {
         <Switch>
           <Route path="/toys" exact component={MainPage} />
           <Route path="/cart" component={CartPage} />
-          <Route path="/login" component={LoginPage} />
+          <Route path="/login/:type?" component={Login} />
           <Route path="/toys/:cardId?" component={ProductCard} />
           <Redirect to="/" />
         </Switch>

@@ -5,7 +5,7 @@ import api from "./../../api";
 import { useEffect } from "react";
 import s from "./workArea.module.css";
 
-const ProductCard = () => {
+const ProductCard = ({ onAdd }) => {
   const params = useParams();
   const { cardId } = params;
 
@@ -58,6 +58,7 @@ const ProductCard = () => {
             </div>
             <div className={s.title}> Cтоимость: {count * card.price}</div>
           </div>
+
           <div>
             <Link to="/cart" className={s.btn2} onClick={pushItem}>
               Купить

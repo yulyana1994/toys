@@ -1,0 +1,26 @@
+.btn{
+    color: #BFE2FF;
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    border: 4px solid #BFE2FF;
+    background: #337AB7;
+    cursor: pointer;
+    outline: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.btn:focus-visible {
+	box-shadow: 0 0 0 2px #666;
+}
+.btn:hover {
+	background-color: #8ab6df;
+}
+.btn:active {
+	transform: scale(0.96);
+}
+
+.btn:disabled {
+	pointer-events: none;
+	opacity: 0.65;
+}

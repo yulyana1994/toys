@@ -4,7 +4,7 @@ import s from "./card.module.css";
 import { useEffect } from "react";
 import api from "../../../api";
 
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Card = ({ name, img, artikul, price, cardId, onAdd }) => {
   const [count, setCount] = useState(1);
@@ -51,9 +51,7 @@ const Card = ({ name, img, artikul, price, cardId, onAdd }) => {
         Добавить в корзину
       </button>
 
-      {/* <Link to={`/toys/${cardId}`} className={s.btn}>
-        Открыть карточку
-      </Link> */}
+      <Link to={`/toys/${cardId}`}>Открыть карточку</Link>
     </div>
   );
 };

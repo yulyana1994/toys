@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import s from "./loginPage.module.css";
+import { validator } from "../../utils/validator";
 import { useEffect } from "react";
 import TextField from "../../components/TextField/textField";
-import { validator } from "../../utils/validator";
+import s from "./registerForm.module.css";
 
-const LoginPage = () => {
+const RegisterForm = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
 
@@ -38,15 +38,15 @@ const LoginPage = () => {
     },
   };
 
-  useEffect(() => {
-    validate();
-  }, [data]);
-
   const validate = () => {
     const errors = validator(data, validatorConfig);
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
+
+  useEffect(() => {
+    validate();
+  }, [data]);
 
   const isValidButton = Object.keys(errors).length === 0;
 
@@ -58,35 +58,29 @@ const LoginPage = () => {
 
     console.log(data);
   };
-
   return (
-    <div className={s.container}>
-      <div className={s.content}>
-        <h3 className={s.login}>Login</h3>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            label="Электронная почта:"
-            type="text"
-            name="email"
-            value={data.email}
-            onChange={handleChange}
-            error={errors.email}
-          />
-          <TextField
-            label="Пароль:"
-            type="password"
-            name="password"
-            value={data.password}
-            onChange={handleChange}
-            error={errors.password}
-          />
-          <button type="submit" disabled={!isValidButton} className={s.btn}>
-            Submit
-          </button>
-        </form>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <TextField
+        label="Электронная почта:"
+        type="text"
+        name="email"
+        value={data.email}
+        onChange={handleChange}
+        error={errors.email}
+      />
+      <TextField
+        label="Пароль:"
+        type="password"
+        name="password"
+        value={data.password}
+        onChange={handleChange}
+        error={errors.password}
+      />
+      <button type="submit" disabled={!isValidButton} className={s.btn}>
+        Submit
+      </button>
+    </form>
   );
 };
 
-export default LoginPage;
+export default RegisterForm;
