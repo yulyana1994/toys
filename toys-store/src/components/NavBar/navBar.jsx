@@ -18,6 +18,9 @@ const NavBar = () => {
         <Link className={s.navLink} to="/login">
           Вход/ Регистрация
         </Link>
+        <Link className={s.navLink} to="/admin">
+          Администрация сайта
+        </Link>
         <Link className={s.navLink} to="/cart">
           <img src="assets/korzina.png" alt="cart" /> Корзина
         </Link>

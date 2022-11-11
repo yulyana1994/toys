@@ -1,8 +1,7 @@
 import React from "react";
 import s from "./workArea.module.css";
-import Card from "./Card/card";
+import Card from "../ToysCard/Card/card";
 import { useState } from "react";
-import api from "../../api";
 import { useEffect } from "react";
 import Categories from "../Categories/categories";
 import Pagination from "../Pagination/pagination";
@@ -11,41 +10,34 @@ import Sort from "../Sort/sort";
 import _ from "lodash";
 import { useContext } from "react";
 import { CartContext } from "../../App";
+import { useGoods } from "../../hooks/useGoods";
+import { useCategory } from "../../hooks/useCategory";
 
 const WorkArea = () => {
-  const [toys, setToys] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState();
   const [sortBy, setSortBy] = useState({ iter: "", order: "" });
-
   const { orders, add } = useContext(CartContext);
-
-  useEffect(() => {
-    api.toys.getAll().then((data) => setToys(data));
-  }, []);
+  console.log(selectedCategories);
+  const { goods } = useGoods();
+  const category = useCategory();
 
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedCategories, searchQuery]);
 
-  useEffect(() => {
-    api.categories.getAll().then((data) => setCategories(data));
-  }, []);
-
   const pageSize = 6;
 
   const filteredToys = searchQuery
-    ? toys.filter(
-        (toy) =>
-          toy.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
+    ? goods.filter(
+        (g) => g.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
       )
     : selectedCategories
-    ? toys.filter((toy) => toy.category === selectedCategories)
-    : toys;
+    ? goods.filter((toy) => toy.category.includes(selectedCategories))
+    : goods;
 
-  const count = filteredToys.length;
+  const count = filteredToys.length ?? 0;
   const sortedToys = _.orderBy(filteredToys, [sortBy.iter], [sortBy.order]);
 
   const toysCrop = paginate(sortedToys, currentPage, pageSize);
@@ -110,7 +102,7 @@ const WorkArea = () => {
         <div className={s.categoriesWrapper}>
           <Categories
             selectedItem={selectedCategories}
-            items={categories}
+            items={category}
             onItemSelect={handleCategoriesSelect}
           />
           <button className={s.btnClear} onClick={clearFilter}>

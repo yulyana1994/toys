@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./mainPage.module.css";
-import WorkArea from "../../components/ToysCard/workArea";
+import WorkArea from "./../../components/WorkArea/workArea";
 
 const MainPage = () => {
   return (

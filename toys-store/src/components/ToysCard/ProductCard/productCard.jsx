@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
-import api from "./../../api";
+import api from "../../../api";
 import { useEffect } from "react";
-import s from "./workArea.module.css";
+import s from "./productCard.module.css";
 
 const ProductCard = ({ onAdd }) => {
   const params = useParams();

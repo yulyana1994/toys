@@ -3,15 +3,19 @@ import MainPage from "./pages/MainPage/mainPage";
 import CartPage from "./pages/Cart/cartPage";
 import Login from "./pages/Login/login";
 import { Redirect, Route, Switch } from "react-router-dom";
-import ProductCard from "./components/ToysCard/productCard";
+import ProductCard from "./components/ToysCard/ProductCard/productCard";
 import NavBar from "./components/NavBar/navBar";
+import Admin from "./pages/Admin/admin";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { CategoryProvider } from "./hooks/useCategory";
+import GoodsProvider from "./hooks/useGoods";
 
 export const CartContext = React.createContext();
 
 const CartProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
 
-  // { ...product, count: 1 }
   const add = (product) => {
     let isAnArray = false;
     orders.forEach((el) => {
@@ -32,15 +36,21 @@ function App() {
   return (
     <div>
       <CartProvider>
-        <NavBar />
-        <Switch>
-          <Route path="/toys" exact component={MainPage} />
-          <Route path="/cart" component={CartPage} />
-          <Route path="/login/:type?" component={Login} />
-          <Route path="/toys/:cardId?" component={ProductCard} />
-          <Redirect to="/" />
-        </Switch>
+        <CategoryProvider>
+          <GoodsProvider>
+            <NavBar />
+            <Switch>
+              <Route path="/toys" exact component={MainPage} />
+              <Route path="/cart" component={CartPage} />
+              <Route path="/admin" component={Admin} />
+              <Route path="/login/:type?" component={Login} />
+              <Route path="/toys/:cardId?" component={ProductCard} />
+              <Redirect to="/" />
+            </Switch>
+          </GoodsProvider>
+        </CategoryProvider>
       </CartProvider>
+      <ToastContainer />
     </div>
   );
 }

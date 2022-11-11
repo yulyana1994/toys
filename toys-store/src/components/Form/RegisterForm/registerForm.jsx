@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { validator } from "../../utils/validator";
+import { validator } from "../../../utils/validator";
 import { useEffect } from "react";
-import TextField from "../../components/TextField/textField";
+import TextField from "./../TextField/textField";
 import s from "./registerForm.module.css";
 
 const RegisterForm = () => {
