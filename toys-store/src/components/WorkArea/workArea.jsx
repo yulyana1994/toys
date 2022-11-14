@@ -19,8 +19,9 @@ const WorkArea = () => {
   const [selectedCategories, setSelectedCategories] = useState();
   const [sortBy, setSortBy] = useState({ iter: "", order: "" });
   const { orders, add } = useContext(CartContext);
-  console.log(selectedCategories);
+
   const { goods } = useGoods();
+
   const category = useCategory();
 
   useEffect(() => {
@@ -74,15 +75,7 @@ const WorkArea = () => {
   };
 
   const toysCard = toysCrop.map((el) => (
-    <Card
-      key={el.id}
-      name={el.name}
-      img={el.img}
-      artikul={el.id}
-      price={el.price}
-      cardId={el.id}
-      onAdd={add}
-    />
+    <Card key={el.id} good={el} onAdd={add} />
   ));
 
   return (

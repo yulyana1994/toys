@@ -1,18 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import s from "./card.module.css";
-import { useEffect } from "react";
-import api from "../../../api";
-
 import { Link } from "react-router-dom";
 
-const Card = ({ name, img, artikul, price, cardId, onAdd }) => {
+const Card = ({ good, onAdd }) => {
+  const { name, img, artikul, price, cardId } = good;
   const [count, setCount] = useState(1);
-  const [card, setCard] = useState();
-
-  useEffect(() => {
-    api.toys.getById(cardId).then((data) => setCard(data));
-  }, [cardId]);
 
   const plus = () => {
     setCount(count + 1);
@@ -47,7 +40,7 @@ const Card = ({ name, img, artikul, price, cardId, onAdd }) => {
       <div>
         <p>Стоимость: {price * count} рублей</p>
       </div>
-      <button className={s.btn} onClick={() => onAdd({ ...card, count })}>
+      <button className={s.btn} onClick={() => onAdd({ ...good, count })}>
         Добавить в корзину
       </button>
 

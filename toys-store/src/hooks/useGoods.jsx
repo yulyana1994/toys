@@ -19,7 +19,6 @@ const GoodsProvider = ({ children }) => {
     async function getGoods() {
       try {
         const { content } = await goodsService.get();
-        console.log(content);
         setGoods(content);
         setLoading(false);
       } catch (error) {
@@ -42,7 +41,7 @@ const GoodsProvider = ({ children }) => {
     setError(message);
     setLoading(false);
   }
-  console.log(goods);
+
   return (
     <GoodsContext.Provider value={{ goods }}>
       {isLoading ? "Loading.12.." : children}

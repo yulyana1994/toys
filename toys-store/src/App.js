@@ -9,6 +9,7 @@ import Admin from "./pages/Admin/admin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CategoryProvider } from "./hooks/useCategory";
+
 import GoodsProvider from "./hooks/useGoods";
 
 export const CartContext = React.createContext();
@@ -17,12 +18,16 @@ const CartProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
 
   const add = (product) => {
-    let isAnArray = false;
-    orders.forEach((el) => {
-      if (el.id === product.id) isAnArray = true;
-    });
+    const newOrders = [...orders];
+    const orderIndex = newOrders.findIndex((o) => o.id === product.id);
 
-    if (!isAnArray) setOrders((prev) => [...prev, product]);
+    if (orderIndex !== -1) {
+      newOrders[orderIndex] = product;
+    } else {
+      newOrders.push(product);
+    }
+
+    setOrders(newOrders);
   };
 
   return (
