@@ -3,13 +3,19 @@ import { validator } from "../../../utils/validator";
 import { useEffect } from "react";
 import s from "./loginForm.module.css";
 import TextField from "../TextField/textField";
+import { useAuth } from "../../../hooks/useAuth";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
+  const [enterError, setEnterError] = useState(null);
+  const history = useHistory();
+  const { logIn } = useAuth();
 
   const handleChange = ({ target }) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
+    setEnterError(null);
   };
 
   const validatorConfig = {
@@ -50,13 +56,17 @@ const LoginForm = () => {
 
   const isValidButton = Object.keys(errors).length === 0;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const isValid = validate();
-
     if (!isValid) return;
-
     console.log(data);
+    try {
+      await logIn(data);
+      history.push("/toys");
+    } catch (error) {
+      setEnterError(error.message);
+    }
   };
 
   return (
@@ -77,7 +87,12 @@ const LoginForm = () => {
         onChange={handleChange}
         error={errors.password}
       />
-      <button type="submit" disabled={!isValidButton} className={s.btn}>
+      {enterError && <p className={s.error}>{enterError}</p>}
+      <button
+        type="submit"
+        disabled={!isValidButton || enterError}
+        className={s.btn}
+      >
         Submit
       </button>
     </form>
