@@ -3,10 +3,14 @@ import { validator } from "../../../utils/validator";
 import { useEffect } from "react";
 import TextField from "./../TextField/textField";
 import s from "./registerForm.module.css";
+import { useAuth } from "../../../hooks/useAuth";
+import { useHistory } from "react-router-dom";
 
 const RegisterForm = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
+  const { signUp } = useAuth();
+  const history = useHistory();
 
   const handleChange = ({ target }) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
@@ -50,12 +54,22 @@ const RegisterForm = () => {
 
   const isValidButton = Object.keys(errors).length === 0;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const isValid = validate();
     if (!isValid) return;
-    console.log(data);
+    const newData = {
+      ...data,
+    };
+
+    try {
+      await signUp(newData);
+      history.push("/toys");
+    } catch (error) {
+      setErrors(error);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <TextField

@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { CategoryProvider } from "./hooks/useCategory";
 
 import GoodsProvider from "./hooks/useGoods";
+import AuthProvider from "./hooks/useAuth";
 
 export const CartContext = React.createContext();
 
@@ -40,21 +41,23 @@ const CartProvider = ({ children }) => {
 function App() {
   return (
     <div>
-      <CartProvider>
-        <CategoryProvider>
-          <GoodsProvider>
-            <NavBar />
-            <Switch>
-              <Route path="/toys" exact component={MainPage} />
-              <Route path="/cart" component={CartPage} />
-              <Route path="/admin" component={Admin} />
-              <Route path="/login/:type?" component={Login} />
-              <Route path="/toys/:cardId?" component={ProductCard} />
-              <Redirect to="/" />
-            </Switch>
-          </GoodsProvider>
-        </CategoryProvider>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <CategoryProvider>
+            <GoodsProvider>
+              <NavBar />
+              <Switch>
+                <Route path="/toys" exact component={MainPage} />
+                <Route path="/cart" component={CartPage} />
+                <Route path="/admin" component={Admin} />
+                <Route path="/login/:type?" component={Login} />
+                <Route path="/toys/:cardId?" component={ProductCard} />
+                <Redirect to="/toys" />
+              </Switch>
+            </GoodsProvider>
+          </CategoryProvider>
+        </CartProvider>
+      </AuthProvider>
       <ToastContainer />
     </div>
   );
