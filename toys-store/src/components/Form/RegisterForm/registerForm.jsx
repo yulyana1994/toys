@@ -7,11 +7,10 @@ import { useAuth } from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
 
 const RegisterForm = () => {
-  const [data, setData] = useState({ email: "", password: "" });
+  const [data, setData] = useState({ email: "", password: "", name: "" });
   const [errors, setErrors] = useState({});
   const { signUp } = useAuth();
   const history = useHistory();
-
   const handleChange = ({ target }) => {
     setData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
@@ -23,6 +22,15 @@ const RegisterForm = () => {
       },
       isEmail: {
         message: "Email введен некорректно",
+      },
+    },
+    name: {
+      isRequired: {
+        message: "Имя обязательно для заполнения",
+      },
+      min: {
+        message: "Имя должно состоять минимум из 3 символов",
+        value: 3,
       },
     },
     password: {
@@ -87,6 +95,14 @@ const RegisterForm = () => {
         value={data.password}
         onChange={handleChange}
         error={errors.password}
+      />
+      <TextField
+        label="Имя:"
+        type="text"
+        name="name"
+        value={data.name}
+        onChange={handleChange}
+        error={errors.name}
       />
       <button type="submit" disabled={!isValidButton} className={s.btn}>
         Submit

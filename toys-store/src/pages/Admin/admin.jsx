@@ -1,63 +1,92 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useRef } from "react";
 import s from "./admin.module.css";
-import httpService from "../../services/http.services";
-import config from "./../../config.json";
-import AddGoodsAdmin from "../../components/AddGoodsAdmin/addGoodsAdmin";
-import GoodsAdmin from "../../components/GoodsAdmin/goodsAdmin";
+import goodsService from "../../services/goods.services";
+import TextField from "./../../components/Form/TextField/textField";
 
 const Admin = () => {
-  const [data, setData] = useState({
+  const goods = useRef({
     id: "",
     name: "",
-    categories: "",
+    category: [],
+    description: "",
+    count: "",
     price: "",
     img: "",
   });
 
-  const enterData = async (content) => {
+  async function createGoods(data) {
     try {
-      const { data } = await httpService.post(config.apiEndpoint, content);
-      return data;
+      const { content } = goodsService.create(data);
     } catch (error) {
       console.log("expected error");
     }
-  };
-
-  const getData = async (id) => {
-    try {
-      const { data } = await httpService.get(config.apiEndpoint);
-      return data;
-    } catch (error) {
-      console.log("expected error");
-    }
-  };
-
-  useEffect(() => {
-    getData().then((data) => setData(data.content));
-  }, []);
-
-  const handleChange = (target) => {
-    setData((prevState) => ({
-      ...prevState,
-      [target.name]: target.value,
-    }));
-  };
-
-  const onSubmit = (data) => {
-    enterData(data);
-  };
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(data);
+    createGoods(goods.current);
   };
+
+  const handleChange = (key) => (e) => {
+    const { target: value } = e;
+    const newValue = value.value;
+
+    if (key === "category") {
+      goods.current[key] = [newValue];
+      return;
+    }
+
+    goods.current[key] = newValue;
+  };
+
   return (
-    <div className={s.container}>
-      <AddGoodsAdmin handleSubmit={handleSubmit} handleChange={handleChange} />
-      <GoodsAdmin />
-    </div>
+    <form onSubmit={handleSubmit} className={s.form}>
+      <div className={s.content}>
+        <div className={s.title}>
+          Блок для добавления или редактирования товара
+        </div>
+        <TextField
+          label="id:"
+          type="text"
+          onChange={handleChange("id")}
+          name="id"
+        />
+        <TextField
+          label="Наименование:"
+          type="text"
+          onChange={handleChange("name")}
+        />
+        <div className={s.containerCat}>
+          <label htmlFor="category">Категория:</label>
+
+          <select id="category" onChange={handleChange("category")}>
+            <option disabled>Выберите категорию</option>
+            <option value={"cat1"}>Для мальчиков</option>
+            <option value={"cat2"}>Для девочек</option>
+            <option value={"cat3"}>Для младенцев</option>
+            <option value={"cat4"}>Канцелярия</option>
+          </select>
+        </div>
+        <TextField
+          label="Стоимость:"
+          type="text"
+          onChange={handleChange("price")}
+        />
+        <TextField
+          label="Количество:"
+          type="text"
+          onChange={handleChange("count")}
+        />
+        <TextField label="img:" type="text" onChange={handleChange("img")} />
+        <TextField
+          label="Описание товара:"
+          type="text"
+          onChange={handleChange("description")}
+        />
+        <button type="submit">Добавить товар</button>
+      </div>
+    </form>
   );
 };
 

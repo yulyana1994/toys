@@ -7,6 +7,7 @@ import { useState } from "react";
 const CartPage = () => {
   const data = useContext(CartContext);
   const [products, setProducts] = useState(data.orders);
+  console.log(data.orders);
 
   const handleDelete = (productsId) => {
     setProducts(products.filter((el) => el.id !== productsId));

@@ -29,6 +29,10 @@ const GoodsProvider = ({ children }) => {
     getGoods();
   }, []);
 
+  function getGoodsById(goodsId) {
+    return goods.find((g) => g.id === goodsId);
+  }
+
   function errorCatcher(error) {
     const { message } = error.response.data;
     setError(message);
@@ -42,7 +46,7 @@ const GoodsProvider = ({ children }) => {
   }, [error]);
 
   return (
-    <GoodsContext.Provider value={{ goods }}>
+    <GoodsContext.Provider value={{ goods, getGoodsById }}>
       {isLoading ? "Loading.12.." : children}
     </GoodsContext.Provider>
   );

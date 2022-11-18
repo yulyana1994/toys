@@ -12,6 +12,8 @@ import { CategoryProvider } from "./hooks/useCategory";
 
 import GoodsProvider from "./hooks/useGoods";
 import AuthProvider from "./hooks/useAuth";
+import Logout from "./pages/Logout/logout";
+import ProtectedRouts from "./pages/Admin/ProtectedRouts";
 
 export const CartContext = React.createContext();
 
@@ -49,9 +51,10 @@ function App() {
               <Switch>
                 <Route path="/toys" exact component={MainPage} />
                 <Route path="/cart" component={CartPage} />
-                <Route path="/admin" component={Admin} />
+                <ProtectedRouts path="/admin" component={Admin} />
                 <Route path="/login/:type?" component={Login} />
-                <Route path="/toys/:cardId?" component={ProductCard} />
+                <Route path="/logout" component={Logout} />
+                <Route path="/toys/:goodsId?" component={ProductCard} />
                 <Redirect to="/toys" />
               </Switch>
             </GoodsProvider>

@@ -5,8 +5,10 @@ import { useEffect } from "react";
 import userService from "../services/user.services";
 import { useState } from "react";
 import { setTokens } from "../services/localStorage.service";
+import localStorageService from "../services/localStorage.service";
+import { useHistory } from "react-router-dom";
 
-const httpAuth = axios.create();
+export const httpAuth = axios.create();
 const AuthContext = React.createContext();
 
 export const useAuth = () => {
@@ -14,8 +16,10 @@ export const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState();
   const [error, setError] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+  const history = useHistory();
 
   async function logIn({ email, password }) {
     const key = "AIzaSyCcRSNAIxv-ODIQ-jXdBUPMaAaDEi39BgI";
@@ -27,6 +31,7 @@ const AuthProvider = ({ children }) => {
         returnSecureToken: true,
       });
       setTokens(data);
+      getUserData();
     } catch (error) {
       errorCatcher(error);
       const { code, message } = error.response.data.error;
@@ -39,18 +44,25 @@ const AuthProvider = ({ children }) => {
     }
   }
 
-  async function signUp({ email, password }) {
+  function logout() {
+    localStorageService.removeAuthData();
+    setCurrentUser(null);
+    history.push("/toys");
+  }
+
+  async function signUp({ email, password, name }) {
     const key = "AIzaSyCcRSNAIxv-ODIQ-jXdBUPMaAaDEi39BgI";
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
     try {
       const { data } = await httpAuth.post(url, {
         email,
         password,
+        name,
         returnSecureToken: true,
       });
       setTokens(data);
 
-      await createUser({ id: data.localId, email });
+      await createUser({ id: data.localId, email, name });
     } catch (error) {
       errorCatcher(error);
 
@@ -80,6 +92,25 @@ const AuthProvider = ({ children }) => {
     const { message } = error.response.data;
     setError(message);
   }
+
+  async function getUserData() {
+    try {
+      const { content } = await userService.getCurrentUser();
+      setCurrentUser(content);
+    } catch (error) {
+      errorCatcher(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+  useEffect(() => {
+    if (localStorageService.getAccessToken()) {
+      getUserData();
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (error !== null) {
       toast(error);
@@ -88,8 +119,8 @@ const AuthProvider = ({ children }) => {
   }, [error]);
 
   return (
-    <AuthContext.Provider value={{ signUp, currentUser, logIn }}>
-      {children}
+    <AuthContext.Provider value={{ signUp, currentUser, logIn, logout }}>
+      {!isLoading ? children : "Loading..."}
     </AuthContext.Provider>
   );
 };

@@ -4,7 +4,7 @@ import s from "./card.module.css";
 import { Link } from "react-router-dom";
 
 const Card = ({ good, onAdd }) => {
-  const { name, img, artikul, price, cardId } = good;
+  const { name, img, id, price } = good;
   const [count, setCount] = useState(1);
 
   const plus = () => {
@@ -18,7 +18,7 @@ const Card = ({ good, onAdd }) => {
   return (
     <div className={s.card}>
       <img width={133} height={112} src={img} alt={name} />
-      <span className={s.artikul}> Артикул: {artikul}</span>
+      <span className={s.artikul}> Артикул: {id}</span>
       <div>
         <p className={s.title}>{name}</p>
       </div>
@@ -44,7 +44,7 @@ const Card = ({ good, onAdd }) => {
         Добавить в корзину
       </button>
 
-      <Link to={`/toys/${cardId}`}>Открыть карточку</Link>
+      <Link to={`/toys/${id}`}>Открыть карточку</Link>
     </div>
   );
 };

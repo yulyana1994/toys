@@ -1,21 +1,20 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
-import api from "../../../api";
-import { useEffect } from "react";
 import s from "./productCard.module.css";
+import { CartContext } from "./../../../App";
+import { useContext } from "react";
+import { useGoods } from "../../../hooks/useGoods";
 
-const ProductCard = ({ onAdd }) => {
+const ProductCard = ({ good }) => {
+  const data = useContext(CartContext);
+  const onAdd = data.add;
+
   const params = useParams();
-  const { cardId } = params;
-
-  const [card, setCard] = useState();
+  const { goodsId } = params;
+  const { getGoodsById } = useGoods();
+  const card = getGoodsById(goodsId);
   const [count, setCount] = useState(1);
-  const [cartItems, setCartItems] = useState([]);
-
-  useEffect(() => {
-    api.toys.getById(cardId).then((data) => setCard(data));
-  }, [cardId]);
 
   const plus = () => {
     setCount(count + 1);
@@ -25,15 +24,8 @@ const ProductCard = ({ onAdd }) => {
     setCount(count - 1);
   };
 
-  const pushItem = () => {
-    // setCartItems((prev) => [...prev, card]);
-    setCartItems(cartItems.push(card));
-    console.log(cartItems);
-  };
-
   if (card) {
     return (
-      // <CartItemsContext.Provider value={cartItems}>
       <div className={s.wrapperProductCard}>
         <div className={s.card}>
           <img width={133} height={112} src={card.src} alt={card.name} />
@@ -60,14 +52,17 @@ const ProductCard = ({ onAdd }) => {
           </div>
 
           <div>
-            <Link to="/cart" className={s.btn2} onClick={pushItem}>
+            <Link
+              to="/cart"
+              className={s.btn2}
+              onClick={() => onAdd({ ...good, count, ...card })}
+            >
               Купить
             </Link>
             <div> Артикул товара: {card.id}</div>
           </div>
         </div>
       </div>
-      // </CartItemsContext.Provider>
     );
   } else {
     return <div> loading...</div>;

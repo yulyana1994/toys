@@ -2,8 +2,10 @@ import React from "react";
 import s from "./navBar.module.css";
 import { Link } from "react-router-dom";
 import Info from "../Info/info";
+import { useAuth } from "../../hooks/useAuth";
 
 const NavBar = () => {
+  const { currentUser } = useAuth();
   return (
     <div className={s.wrapper}>
       <ul className={s.nav}>
@@ -15,12 +17,26 @@ const NavBar = () => {
         <li className={s.navLink}>
           <Info />
         </li>
-        <Link className={s.navLink} to="/login">
-          Вход/ Регистрация
-        </Link>
-        <Link className={s.navLink} to="/admin">
-          Администрация сайта
-        </Link>
+
+        {currentUser ? (
+          <Link className={s.navLinkLA} to="/logout">
+            Log out
+          </Link>
+        ) : (
+          <Link className={s.navLinkLA} to="/login">
+            Log in
+          </Link>
+        )}
+
+        {/* <Link className={s.navLinkLA} to="/login">
+          Log in
+        </Link> */}
+        {currentUser && (
+          <Link className={s.navLinkLA} to="/admin">
+            Администрация сайта
+          </Link>
+        )}
+
         <Link className={s.navLink} to="/cart">
           <img src="assets/korzina.png" alt="cart" /> Корзина
         </Link>

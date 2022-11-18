@@ -8,5 +8,9 @@ const goodsService = {
 
     return data;
   },
+  create: async (payload) => {
+    const { data } = await httpService.put(goodsEndpoint + payload.id, payload);
+    return data;
+  },
 };
 export default goodsService;

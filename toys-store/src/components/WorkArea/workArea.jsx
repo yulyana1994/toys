@@ -22,6 +22,8 @@ const WorkArea = () => {
 
   const { goods } = useGoods();
 
+  console.log(goods);
+
   const category = useCategory();
 
   useEffect(() => {

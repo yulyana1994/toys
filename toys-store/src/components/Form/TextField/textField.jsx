@@ -8,6 +8,7 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
   };
+
   return (
     <div className={s.container}>
       <label htmlFor={name}>{label}</label>
