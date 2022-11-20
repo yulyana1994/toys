@@ -89,14 +89,14 @@ const AuthProvider = ({ children }) => {
   }
 
   function errorCatcher(error) {
-    const { message } = error.response.data;
+    const { message } = error.response?.data;
     setError(message);
   }
 
   async function getUserData() {
     try {
-      const { content } = await userService.getCurrentUser();
-      setCurrentUser(content);
+      const user = await userService.getCurrentUser();
+      setCurrentUser(user);
     } catch (error) {
       errorCatcher(error);
     } finally {

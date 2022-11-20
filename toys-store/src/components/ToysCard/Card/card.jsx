@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Card = ({ good, onAdd }) => {
   const { name, img, id, price } = good;
   const [count, setCount] = useState(1);
-
+  console.log(img);
   const plus = () => {
     setCount(count + 1);
   };

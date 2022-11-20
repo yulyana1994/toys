@@ -40,18 +40,11 @@ http.interceptors.request.use(
   }
 );
 
-function transformData(data) {
-  return data
-    ? Object.keys(data).map((key) => ({
-        ...data[key],
-      }))
-    : [];
-}
 http.interceptors.response.use(
   (res) => {
-    if (configFile.isFireBase) {
-      res.data = { content: transformData(res.data) };
-    }
+    // if (configFile.isFireBase) {
+    //   res.data = { content: transformData(res.data) };
+    // }
     return res;
   },
   function (error) {

@@ -4,6 +4,21 @@ import s from "./admin.module.css";
 import goodsService from "../../services/goods.services";
 import TextField from "./../../components/Form/TextField/textField";
 
+const convertBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    };
+
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+  });
+};
+
 const Admin = () => {
   const goods = useRef({
     id: "",
@@ -12,12 +27,12 @@ const Admin = () => {
     description: "",
     count: "",
     price: "",
-    img: "",
+    img: {},
   });
 
   async function createGoods(data) {
     try {
-      const { content } = goodsService.create(data);
+      goodsService.create(data);
     } catch (error) {
       console.log("expected error");
     }
@@ -37,8 +52,16 @@ const Admin = () => {
       return;
     }
 
+    if (key === "img") {
+      convertBase64(e.target.files[0]).then((file) => {
+        goods.current[key] = file;
+      });
+      return;
+    }
+
     goods.current[key] = newValue;
   };
+  console.log(goods.current);
 
   return (
     <form onSubmit={handleSubmit} className={s.form}>
@@ -59,9 +82,10 @@ const Admin = () => {
         />
         <div className={s.containerCat}>
           <label htmlFor="category">Категория:</label>
-
           <select id="category" onChange={handleChange("category")}>
-            <option disabled>Выберите категорию</option>
+            <option disabled selected>
+              Выберите категорию
+            </option>
             <option value={"cat1"}>Для мальчиков</option>
             <option value={"cat2"}>Для девочек</option>
             <option value={"cat3"}>Для младенцев</option>
@@ -78,7 +102,10 @@ const Admin = () => {
           type="text"
           onChange={handleChange("count")}
         />
-        <TextField label="img:" type="text" onChange={handleChange("img")} />
+
+        <label htmlFor="photo">Выберите фото:</label>
+        <input type="file" onChange={handleChange("img")}></input>
+        {/* <TextField label="img:" type="text" onChange={handleChange("img")} /> */}
         <TextField
           label="Описание товара:"
           type="text"

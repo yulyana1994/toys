@@ -18,8 +18,9 @@ const GoodsProvider = ({ children }) => {
   useEffect(() => {
     async function getGoods() {
       try {
-        const { content } = await goodsService.get();
-        setGoods(content);
+        const data = await goodsService.get();
+
+        setGoods(data);
         setLoading(false);
       } catch (error) {
         errorCatcher();
@@ -38,6 +39,7 @@ const GoodsProvider = ({ children }) => {
     setError(message);
     setLoading(false);
   }
+
   useEffect(() => {
     if (error !== null) {
       toast(error);

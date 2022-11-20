@@ -4,7 +4,9 @@ import { useAuth } from "../../hooks/useAuth";
 
 const ProtectedRouts = ({ component: Component, children, ...rest }) => {
   const { currentUser } = useAuth();
+
   console.log(currentUser);
+
   return (
     <Route
       {...rest}

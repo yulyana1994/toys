@@ -28,9 +28,10 @@ const ProductCard = ({ good }) => {
     return (
       <div className={s.wrapperProductCard}>
         <div className={s.card}>
-          <img width={133} height={112} src={card.src} alt={card.name} />
+          <img width={133} height={112} src={card.img} alt={card.name} />
           <div>
             <div className={s.title}>{card.name}</div>
+            <div className={s.title}> Описание:{card.description}</div>
             <div>
               <div className={s.blockQuality}>
                 <div className={s.title}> Количество: {count}</div>

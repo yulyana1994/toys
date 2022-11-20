@@ -18,8 +18,9 @@ export const CategoryProvider = ({ children }) => {
   useEffect(() => {
     async function getCategory() {
       try {
-        const { content } = await categoryService.get();
-        setCategory(content);
+        const data = await categoryService.get();
+
+        setCategory(data);
         setLoading(false);
       } catch (error) {
         errorCatcher();

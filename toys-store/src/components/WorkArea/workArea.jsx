@@ -30,8 +30,7 @@ const WorkArea = () => {
     setCurrentPage(1);
   }, [selectedCategories, searchQuery]);
 
-  const pageSize = 6;
-
+  const pageSize = 2;
   const filteredToys = searchQuery
     ? goods.filter(
         (g) => g.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
@@ -100,6 +99,7 @@ const WorkArea = () => {
             items={category}
             onItemSelect={handleCategoriesSelect}
           />
+
           <button className={s.btnClear} onClick={clearFilter}>
             Очистить
           </button>
