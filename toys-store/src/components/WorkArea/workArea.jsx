@@ -28,7 +28,7 @@ const WorkArea = () => {
     setCurrentPage(1);
   }, [selectedCategories, searchQuery]);
 
-  const pageSize = 2;
+  const pageSize = 4;
   const filteredToys = searchQuery
     ? goods.filter(
         (g) => g.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1

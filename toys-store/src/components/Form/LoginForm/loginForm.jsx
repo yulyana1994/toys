@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { validator } from "../../../utils/validator";
 import { useEffect } from "react";
-import s from "./loginForm.module.css";
 import TextField from "../TextField/textField";
 import { useAuth } from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";

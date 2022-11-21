@@ -1,54 +1,57 @@
 import React from "react";
-import s from "./navBar.module.css";
 import { Link } from "react-router-dom";
 import Info from "../Info/info";
 import { useAuth } from "../../hooks/useAuth";
+import { roles } from "../../utils/constants";
 
 const NavBar = () => {
   const { currentUser } = useAuth();
   console.log(currentUser);
   return (
-    <div className={s.wrapper}>
-      <ul className={s.nav}>
-        <li className={s.navLink}>
-          <Link to="/toys">
-            <img className={s.logo} src="assets/logo2.png" alt="logo" />
-          </Link>
-        </li>
-        <li className={s.navLink}>
-          <Info />
-        </li>
+    <nav className="navbar bg-light mb-3 ">
+      <div className="container-fluid d-flex justify-content-center">
+        <ul className="nav">
+          <li className="nav-item">
+            <Link className="nav-link " aria-current="page" to="/toys">
+              <img
+                className="d-inline-block align-text-top"
+                src="assets/logo2.png"
+                height="70"
+                alt="logo"
+              />
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Info />
+          </li>
 
-        {currentUser ? (
-          <Link className={s.navLinkLA} to="/logout">
-            Log out
-          </Link>
-        ) : (
-          <Link className={s.navLinkLA} to="/login">
-            Log in
-          </Link>
-        )}
-        {currentUser && (
-          <Link className={s.navLinkLA} to="/admin">
-            Администрация сайта
-          </Link>
-        )}
+          {currentUser ? (
+            <Link className="nav-link " aria-current="page" to="/logout">
+              Log out
+            </Link>
+          ) : (
+            <Link className="nav-link " aria-current="page" to="/login">
+              Log in
+            </Link>
+          )}
 
-        {/* {currentUser.id === "HgPM7xYqBEc4FDpjUsd0MTXHyEy1" ? (
-          <Link className={s.navLinkLA} to="/admin">
-            Администрация сайта
-          </Link>
-        ) : (
-          <Link className={s.navLinkLA} to="/cart">
+          {currentUser?.role === roles.admin && (
+            <Link className="nav-link " aria-current="page" to="/admin">
+              Администрация сайта
+            </Link>
+          )}
+
+          <Link className="nav-link " aria-current="page" to="/cart">
+            <img
+              src="assets/korzina.png"
+              class="d-inline-block align-text-top"
+              alt="cart"
+            />{" "}
             Корзина
           </Link>
-        )} */}
-
-        <Link className={s.navLink} to="/cart">
-          <img src="assets/korzina.png" alt="cart" /> Корзина
-        </Link>
-      </ul>
-    </div>
+        </ul>
+      </div>
+    </nav>
   );
 };
 

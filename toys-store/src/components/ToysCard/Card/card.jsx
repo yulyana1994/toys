@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import s from "./card.module.css";
 import { Link } from "react-router-dom";
 
 const Card = ({ good, onAdd }) => {
@@ -16,35 +15,37 @@ const Card = ({ good, onAdd }) => {
   };
 
   return (
-    <div className={s.card}>
-      <img width={133} height={112} src={img} alt={name} />
-      <span className={s.artikul}> Артикул: {id}</span>
-      <div>
-        <p className={s.title}>{name}</p>
+    <div className="card text-center mb-3 ">
+      <img class="card-img-top" height={170} src={img} alt={name} />
+      <div className="card-body">
+        <p class="card-text"> Артикул: {id}</p>
+        <h4 class="card-title">{name}</h4>
       </div>
-      <div className={s.blockQuality}>
-        <div className={s.title}> Количество: {count}</div>
-        <div className={s.btnMP}>
-          <button onClick={plus} className={s.btn}>
+      <div className="card-body">
+        <p class="card-text"> Количество: {count}</p>
+        <div>
+          <button onClick={plus} className="btn btn-primary me-2">
             +
           </button>
           <button
             onClick={minus}
             disabled={count > 0 ? false : true}
-            className={s.btn}
+            className="btn btn-primary ms-2"
           >
             -
           </button>
         </div>
+        <p class="card-text">Стоимость: {price * count} рублей</p>
+        <button
+          className="btn btn-primary"
+          onClick={() => onAdd({ ...good, count })}
+        >
+          Добавить в корзину
+        </button>
       </div>
-      <div>
-        <p>Стоимость: {price * count} рублей</p>
-      </div>
-      <button className={s.btn} onClick={() => onAdd({ ...good, count })}>
-        Добавить в корзину
-      </button>
-
-      <Link to={`/toys/${id}`}>Открыть карточку</Link>
+      <Link className="card-link" to={`/toys/${id}`}>
+        Открыть карточку
+      </Link>
     </div>
   );
 };

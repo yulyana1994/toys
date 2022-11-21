@@ -1,3 +1,4 @@
+import { roles } from "../utils/constants";
 import httpService from "./http.services";
 import localStorageService from "./localStorage.service";
 
@@ -10,8 +11,11 @@ const userService = {
     return data;
   },
   create: async (payload) => {
-    const { data } = await httpService.put(userEndpoint + payload.id, payload);
-    console.log(data);
+    const { data } = await httpService.put(userEndpoint + payload.id, {
+      ...payload,
+      role: roles.user,
+    });
+
     return data;
   },
   getCurrentUser: async () => {

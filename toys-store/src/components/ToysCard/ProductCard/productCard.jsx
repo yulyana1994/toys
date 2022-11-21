@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
-import s from "./productCard.module.css";
 import { CartContext } from "./../../../App";
 import { useContext } from "react";
 import { useGoods } from "../../../hooks/useGoods";
@@ -26,41 +25,46 @@ const ProductCard = ({ good }) => {
 
   if (card) {
     return (
-      <div className={s.wrapperProductCard}>
-        <div className={s.card}>
-          <img width={133} height={112} src={card.img} alt={card.name} />
-          <div>
-            <div className={s.title}>{card.name}</div>
-            <div className={s.title}> Описание:{card.description}</div>
-            <div>
-              <div className={s.blockQuality}>
-                <div className={s.title}> Количество: {count}</div>
-                <div>
-                  <button onClick={plus} className={s.btn}>
-                    +
-                  </button>
-                  <button
-                    onClick={minus}
-                    disabled={count > 0 ? false : true}
-                    className={s.btn}
-                  >
-                    -
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className={s.title}> Cтоимость: {count * card.price}</div>
+      <div className="card mb-3 text-center">
+        <div className="row g-0">
+          <div className="col-md-4">
+            <img
+              class="img-fluid rounded-start"
+              height={70}
+              src={card.img}
+              alt={card.name}
+            />
           </div>
-
-          <div>
-            <Link
-              to="/cart"
-              className={s.btn2}
-              onClick={() => onAdd({ ...good, count, ...card })}
-            >
-              Купить
-            </Link>
-            <div> Артикул товара: {card.id}</div>
+          <div className="col-md-8">
+            <div className="card-body">
+              <h5 className="card-title">{card.name}</h5>
+              <p className="card-text"> Артикул товара: {card.id}</p>
+              <p className="card-text"> Описание:{card.description}</p>
+            </div>
+            <div className="card-body">
+              <p className="card-text"> Количество: {count}</p>
+              <div>
+                <button onClick={plus} className="btn btn-primary me-3">
+                  +
+                </button>
+                <button
+                  onClick={minus}
+                  disabled={count > 0 ? false : true}
+                  className="btn btn-primary ms-3"
+                >
+                  -
+                </button>
+              </div>
+              <p className="card-text"> Cтоимость: {count * card.price}</p>
+              <Link
+                to="/cart"
+                className="btn btn-primary"
+                role="button"
+                onClick={() => onAdd({ ...good, count, ...card })}
+              >
+                Купить
+              </Link>
+            </div>
           </div>
         </div>
       </div>
