@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import s from "./textField.module.css";
 
 const TextField = ({ label, type, name, value, onChange, error }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -8,30 +7,33 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
   };
+  const getInputClasses = () => {
+    return "form-control" + (error ? " is-invalid" : "");
+  };
 
   return (
-    <div className={s.container}>
+    <div className="mb-4">
       <label htmlFor={name}>{label}</label>
-      <div>
+      <div className="input-group has-validation">
         <input
           type={showPassword ? "text" : type}
           id={name}
           name={name}
           value={value}
           onChange={onChange}
-          className={s.input}
+          className={getInputClasses()}
         />
         {type === "password" && (
-          <button className={s.btnInput} onClick={toggleShowPassword}>
-            {showPassword ? (
-              <img src="assets/closeEye.png" alt="Скрыть пароль" />
-            ) : (
-              <img src="assets/openEye.png" alt="Показать пароль" />
-            )}
+          <button
+            className="btn btn-outline-secondary"
+            type="button"
+            onClick={toggleShowPassword}
+          >
+            <i className={"bi bi-eye" + (showPassword ? "-slash" : "")}></i>
           </button>
         )}
       </div>
-      {error && <p className={s.error}>{error}</p>}
+      {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 };

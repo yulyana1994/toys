@@ -6,6 +6,7 @@ import { useAuth } from "../../hooks/useAuth";
 
 const NavBar = () => {
   const { currentUser } = useAuth();
+  console.log(currentUser);
   return (
     <div className={s.wrapper}>
       <ul className={s.nav}>
@@ -27,15 +28,21 @@ const NavBar = () => {
             Log in
           </Link>
         )}
-
-        {/* <Link className={s.navLinkLA} to="/login">
-          Log in
-        </Link> */}
         {currentUser && (
           <Link className={s.navLinkLA} to="/admin">
             Администрация сайта
           </Link>
         )}
+
+        {/* {currentUser.id === "HgPM7xYqBEc4FDpjUsd0MTXHyEy1" ? (
+          <Link className={s.navLinkLA} to="/admin">
+            Администрация сайта
+          </Link>
+        ) : (
+          <Link className={s.navLinkLA} to="/cart">
+            Корзина
+          </Link>
+        )} */}
 
         <Link className={s.navLink} to="/cart">
           <img src="assets/korzina.png" alt="cart" /> Корзина

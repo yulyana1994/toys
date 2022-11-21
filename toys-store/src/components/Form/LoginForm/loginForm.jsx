@@ -87,11 +87,11 @@ const LoginForm = () => {
         onChange={handleChange}
         error={errors.password}
       />
-      {enterError && <p className={s.error}>{enterError}</p>}
+      {enterError && <p className="text-danger">{enterError}</p>}
       <button
         type="submit"
         disabled={!isValidButton || enterError}
-        className={s.btn}
+        className="btn btn-primary w-100 mx-auto"
       >
         Submit
       </button>

@@ -21,6 +21,8 @@ const AuthProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
   const history = useHistory();
 
+  console.log(currentUser);
+
   async function logIn({ email, password }) {
     const key = "AIzaSyCcRSNAIxv-ODIQ-jXdBUPMaAaDEi39BgI";
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`;

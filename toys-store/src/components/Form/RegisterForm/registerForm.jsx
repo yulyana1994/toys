@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { validator } from "../../../utils/validator";
 import { useEffect } from "react";
 import TextField from "./../TextField/textField";
-import s from "./registerForm.module.css";
 import { useAuth } from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
 
@@ -104,7 +103,11 @@ const RegisterForm = () => {
         onChange={handleChange}
         error={errors.name}
       />
-      <button type="submit" disabled={!isValidButton} className={s.btn}>
+      <button
+        type="submit"
+        disabled={!isValidButton}
+        className="btn btn-primary w-100 mx-auto"
+      >
         Submit
       </button>
     </form>
