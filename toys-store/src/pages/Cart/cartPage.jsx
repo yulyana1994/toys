@@ -30,7 +30,7 @@ const CartPage = () => {
                 <p>Артикул: {pr.id}</p>
                 <p>{pr.name}</p>
                 <p>Стоимость: {pr.price * pr.count} рублей</p>
-                <p> Количество: {pr.count} штук</p>
+                <p> Количество: {pr.count} </p>
               </div>
               <button className={s.btn} onClick={() => handleDelete(pr.id)}>
                 Удалить

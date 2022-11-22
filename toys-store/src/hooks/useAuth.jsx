@@ -26,6 +26,7 @@ const AuthProvider = ({ children }) => {
   async function logIn({ email, password }) {
     const key = "AIzaSyCcRSNAIxv-ODIQ-jXdBUPMaAaDEi39BgI";
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`;
+
     try {
       const { data } = await httpAuth.post(url, {
         email,

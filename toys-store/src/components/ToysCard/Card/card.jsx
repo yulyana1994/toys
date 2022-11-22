@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import s from "./card.module.css";
 import { Link } from "react-router-dom";
 
 const Card = ({ good, onAdd }) => {
@@ -15,13 +16,13 @@ const Card = ({ good, onAdd }) => {
   };
 
   return (
-    <div className="card text-center mb-3 ">
-      <img class="card-img-top" height={170} src={img} alt={name} />
-      <div className="card-body">
+    <div className={s.card}>
+      <img class="card-img-top " height={170} src={img} alt={name} />
+      <div className="card-body text-center">
         <p class="card-text"> Артикул: {id}</p>
         <h4 class="card-title">{name}</h4>
       </div>
-      <div className="card-body">
+      <div className="card-body text-center">
         <p class="card-text"> Количество: {count}</p>
         <div>
           <button onClick={plus} className="btn btn-primary me-2">
