@@ -2,13 +2,11 @@
     display: grid;
     width: 1200px;
     margin: 0 auto;
-    margin-top: 30px;
-    gap: 15px;
+    gap: 25px;
     grid-template-areas: 
-        "navBar navBar"
         "searchString searchString"
         "category st";
-    grid-template-rows: 50px 1fr ;
+    grid-template-rows: 40px 1fr ;
     grid-template-columns: 2fr 10fr;
 }
 
@@ -174,3 +172,4 @@
 	pointer-events: none;
 	opacity: 0.65;
 }
+

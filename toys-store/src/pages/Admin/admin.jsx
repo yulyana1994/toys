@@ -24,7 +24,7 @@ const Admin = () => {
     name: "",
     category: [],
     description: "",
-    price: "",
+    price: 0,
     img: {},
   });
 
@@ -50,6 +50,11 @@ const Admin = () => {
       return;
     }
 
+    if (key === "price") {
+      goods.current[key] = Number(newValue);
+      return;
+    }
+
     if (key === "img") {
       convertBase64(e.target.files[0]).then((file) => {
         goods.current[key] = file;
@@ -59,7 +64,6 @@ const Admin = () => {
 
     goods.current[key] = newValue;
   };
-  console.log(goods.current);
 
   return (
     <div className="container mt-5">
@@ -100,7 +104,7 @@ const Admin = () => {
             </div>
             <TextField
               label="Стоимость товара:"
-              type="text"
+              type="number"
               onChange={handleChange("price")}
             />
 

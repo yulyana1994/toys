@@ -27,7 +27,7 @@ const CartPage = () => {
             <div className={s.cartItem} key={pr.id}>
               <img className={s.imgToys} src={pr.img} alt={pr.name} />
               <div className={s.info}>
-                <p>Артикул: {pr.id}</p>
+                <p className={s.artikul}>Артикул: {pr.id}</p>
                 <p>{pr.name}</p>
                 <p>Стоимость: {pr.price * pr.count} рублей</p>
                 <p> Количество: {pr.count} </p>

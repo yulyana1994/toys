@@ -17,13 +17,13 @@ const Card = ({ good, onAdd }) => {
 
   return (
     <div className={s.card}>
-      <img class="card-img-top " height={170} src={img} alt={name} />
+      <img className="card-img-top " height={170} src={img} alt={name} />
       <div className="card-body text-center">
-        <p class="card-text"> Артикул: {id}</p>
-        <h4 class="card-title">{name}</h4>
+        <p className="card-text"> Артикул: {id}</p>
+        <h4 className="card-title">{name}</h4>
       </div>
       <div className="card-body text-center">
-        <p class="card-text"> Количество: {count}</p>
+        <p className="card-text"> Количество: {count}</p>
         <div>
           <button onClick={plus} className="btn btn-primary me-2">
             +
@@ -36,7 +36,7 @@ const Card = ({ good, onAdd }) => {
             -
           </button>
         </div>
-        <p class="card-text">Стоимость: {price * count} рублей</p>
+        <p className="card-text">Стоимость: {price * count} рублей</p>
         <button
           className="btn btn-primary"
           onClick={() => onAdd({ ...good, count })}

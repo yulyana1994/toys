@@ -44,7 +44,7 @@ const NavBar = () => {
           <Link className="nav-link " aria-current="page" to="/cart">
             <img
               src="assets/korzina.png"
-              class="d-inline-block align-text-top"
+              className="d-inline-block align-text-top"
               alt="cart"
             />{" "}
             Корзина
